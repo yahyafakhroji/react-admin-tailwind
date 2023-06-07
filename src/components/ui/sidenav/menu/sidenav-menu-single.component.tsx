@@ -1,5 +1,5 @@
 import MenuItem from '@components/ui/menu/menu-item.component';
-import { NavMenu } from '@components/ui/sidenav/sidenav-content.component';
+import { NavMenu } from '@components/ui/sidenav/sidenav.component';
 import { useAtomicValue } from '@libraries/state';
 import { NavCollapseAtom } from '@states/atoms/util.atom';
 import React from 'react';
@@ -9,7 +9,7 @@ const SideNavMenuSingle: React.FC<{ nav: NavMenu; onClick: () => void }> = ({ na
   const sideNavCollapse = useAtomicValue(NavCollapseAtom);
 
   return (
-    <MenuItem key={nav.key} onSelect={onClick} className="h-[40px]">
+    <MenuItem key={nav.key} onSelect={onClick} height={40}>
       <Link to={nav.path} className="flex h-full w-full items-center">
         {nav.icon && <span className="mr-2 text-2xl">{nav.icon}</span>}
         {!sideNavCollapse && <span>{nav.title}</span>}

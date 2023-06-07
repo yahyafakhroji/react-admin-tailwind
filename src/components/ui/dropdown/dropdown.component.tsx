@@ -1,18 +1,17 @@
 import DropdownMenu from '@components/ui/dropdown/dropdown-menu.component';
 import DropdownToggle from '@components/ui/dropdown/dropdown-toggle.component';
-import { DropdownPlacement, Triggers } from '@constant';
+import { DropdownPlacements, Triggers } from '@constant';
 import { chainedFunction } from '@helpers/util.helper';
 import useRootClose from '@hooks/useRootClose';
+import useUniqueId from '@hooks/useUniqueId';
 import { indexOf } from 'lodash';
-import { nanoid } from 'nanoid';
 import React, { CSSProperties, forwardRef, Ref, useCallback, useRef } from 'react';
 import DropdownContext from './context/dropdown';
 import DropdownMenuContext, { useDropdownMenuContext } from './context/dropdown-menu';
 
 interface Props {
-  trigger?: Triggers;
-  placement?: DropdownPlacement;
-  menuId?: string;
+  trigger?: Triggers[];
+  placement?: DropdownPlacements;
   menuClass?: string;
   menuStyle?: CSSProperties;
   disabled?: boolean;
@@ -35,7 +34,6 @@ const Dropdown = forwardRef(
     {
       trigger,
       placement,
-      menuId,
       menuClass,
       menuStyle,
       disabled,
@@ -59,13 +57,17 @@ const Dropdown = forwardRef(
     const triggerTarget = useRef();
 
     const menuControl = useDropdownMenuContext(overlayTarget);
+
     const { open } = menuControl;
 
     const { style } = rest as any;
+
+    const buttonId = useUniqueId('dropdown-toggle-');
+    const menuId = useUniqueId('base-menu-');
     const activeKey = '';
 
     const handleToggle = useCallback(
-      (isOpen?: boolean) => {
+      (isOpen?: boolean | undefined) => {
         const nextOpen = typeof isOpen === 'undefined' ? !open : isOpen;
         const fn = nextOpen ? onOpen : onClose;
 
@@ -111,7 +113,7 @@ const Dropdown = forwardRef(
       handleToggle(false);
     };
 
-    useRootClose(() => handleToggle(), {
+    useRootClose(() => handleToggle(false), {
       triggerTarget,
       overlayTarget,
       disabled: !open,
@@ -138,6 +140,21 @@ const Dropdown = forwardRef(
       toggleEventHandlers.onContextMenu = chainedFunction(handleClick, onContextMenu);
     }
 
+    const toggleElement = (
+      <DropdownToggle
+        {...rest}
+        {...toggleEventHandlers}
+        id={buttonId}
+        ref={triggerTarget}
+        className={toggleClassName}
+        titleChildren={titleChildren}
+        disabled={disabled}
+        placement={placement}
+      >
+        {title}
+      </DropdownToggle>
+    );
+
     const menuElement = (
       <DropdownMenu
         activeKey={activeKey}
@@ -154,21 +171,6 @@ const Dropdown = forwardRef(
       </DropdownMenu>
     );
 
-    const toggleElement = (
-      <DropdownToggle
-        {...rest}
-        {...toggleEventHandlers}
-        id={`'dropdown-toggle-${nanoid()}'`}
-        ref={triggerTarget}
-        className={toggleClassName}
-        titleChildren={titleChildren}
-        disabled={disabled}
-        placement={placement}
-      >
-        {title}
-      </DropdownToggle>
-    );
-
     return (
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       <DropdownContext.Provider value={{ activeKey }}>
@@ -182,9 +184,8 @@ const Dropdown = forwardRef(
 );
 
 Dropdown.defaultProps = {
-  trigger: 'click',
+  trigger: ['click'],
   placement: 'bottom-start',
-  menuId: '',
   menuClass: '',
   menuStyle: {},
   disabled: false,

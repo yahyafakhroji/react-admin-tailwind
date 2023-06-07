@@ -1,18 +1,17 @@
 import { DropdownMenuContextProvider, useDropdownMenuContext } from '@components/ui/dropdown/context/dropdown-menu';
-import DropdownItem from '@components/ui/dropdown/dropdown-item.context';
+import DropdownItem from '@components/ui/dropdown/dropdown-item.component';
 import MenuContext, { MenuContextProvider } from '@components/ui/menu/context';
-import { DropdownPlacement, Triggers } from '@constant';
+import { DropdownPlacements, Triggers } from '@constant';
 import { useUncertainRef } from '@helpers/util.helper';
+import useUniqueId from '@hooks/useUniqueId';
 import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
-import { rest } from 'lodash';
-import { nanoid } from 'nanoid';
 import React, { CSSProperties, forwardRef, Ref, useCallback, useContext } from 'react';
 
 interface MenuProps {
   hidden: boolean | undefined;
   activeKey: string;
-  placement: DropdownPlacement;
+  placement: DropdownPlacements;
   className: string;
   menuClass: string;
   children: React.ReactNode;
@@ -23,7 +22,7 @@ interface MenuProps {
 const Menu = forwardRef(
   ({ hidden, activeKey, onSelect, placement, menuClass, className, children, ...rest }: MenuProps, ref: Ref<any>) => {
     const menuRef = useUncertainRef(ref);
-    const menuId = `menu-${nanoid()}`;
+    const menuId = useUniqueId('menu-');
     const menuControl = useDropdownMenuContext(ref);
 
     const getTransform = (deg: number) => {
@@ -89,7 +88,7 @@ interface Props {
   className?: string;
   hidden?: boolean;
   style?: CSSProperties;
-  placement?: DropdownPlacement;
+  placement?: DropdownPlacements;
   onClick?: (values?: any, event?: any) => void;
   onSelect: (values?: any, event?: any) => void;
   onToggle?: (values?: any, event?: any) => void;
@@ -110,6 +109,7 @@ const DropdownMenu = forwardRef(
       eventKey,
       onSelect,
       onToggle,
+      ...rest
     }: Props,
     ref: Ref<any>
   ) => {
@@ -137,7 +137,7 @@ const DropdownMenu = forwardRef(
         ref={ref}
         onSelect={handleSelectSubmenu}
         onToggle={handleToggleSubmenu}
-        placement={placement || 'bottom-start'}
+        placement={placement || 'bottom-end'}
         {...rest}
       >
         {children}
@@ -159,7 +159,21 @@ const DropdownMenu = forwardRef(
       );
     }
 
-    return dropdownSubmenu;
+    return (
+      <Menu
+        className={classNames('dropdown-menu', placement, className)}
+        menuClass={menuClass || ''}
+        activeKey={activeKey}
+        hidden={hidden}
+        ref={ref}
+        onSelect={handleSelectSubmenu}
+        onToggle={handleToggleSubmenu}
+        placement={placement || 'bottom-end'}
+        {...rest}
+      >
+        {children}
+      </Menu>
+    );
   }
 );
 
@@ -173,7 +187,7 @@ DropdownMenu.defaultProps = {
   placement: 'bottom-start',
   menuClass: '',
   className: '',
-  hidden: false,
+  hidden: true,
   onClick: () => 0,
   onToggle: () => 0,
 };

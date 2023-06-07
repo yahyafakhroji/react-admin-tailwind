@@ -15,11 +15,12 @@ export interface NavMenuItem {
   eventKey?: string;
   variant?: string;
   style?: CSSProperties;
+  height?: number;
 }
 
 const MenuItem = forwardRef(
   (
-    { eventKey, children, onSelect, asElement, disabled, isActive, className, ...rest }: NavMenuItem,
+    { eventKey, children, onSelect, asElement, disabled, isActive, className, height, style, ...rest }: NavMenuItem,
     ref: Ref<HTMLElement>
   ) => {
     const themeMode = useAtomicValue(ThemeModeAtom);
@@ -44,6 +45,7 @@ const MenuItem = forwardRef(
         ref,
         className: menuClass,
         onClick: handleOnClick,
+        style: { height: `${height}px`, ...style },
         ...rest,
       },
       children
@@ -56,6 +58,7 @@ MenuItem.defaultProps = {
   disabled: false,
   isActive: false,
   className: '',
+  height: 35,
   eventKey: '',
   id: 'menu-item',
   variant: 'light',

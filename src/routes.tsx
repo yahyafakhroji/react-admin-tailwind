@@ -1,5 +1,5 @@
 /*  eslint-disable react/react-in-jsx-scope */
-import { NavMenu } from '@components/ui/sidenav/sidenav-content.component';
+import { NavMenu } from '@components/ui/sidenav/sidenav.component';
 import AuthLayout from '@layouts/auth/auth.layout';
 import MainLayout from '@layouts/main/main.layout';
 import LoginPage from '@pages/auth/login';
@@ -65,7 +65,7 @@ export const navigations: NavMenu[] = [
         key: 'group.one',
         path: '/',
         title: 'Group 1',
-        icon: null,
+        icon: <HiOutlineHome />,
         type: 'item',
         children: [],
       },
@@ -73,7 +73,7 @@ export const navigations: NavMenu[] = [
         key: 'group.two',
         path: '/',
         title: 'Group 2',
-        icon: null,
+        icon: <HiOutlineHome />,
         type: 'item',
         children: [],
       },

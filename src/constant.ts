@@ -21,9 +21,11 @@ export type Triggers = 'click' | 'hover' | 'context';
 
 export type ButtonShapes = 'round' | 'circle' | 'none';
 
-export type ButtonVariant = 'solid' | 'twoTone' | 'plain' | 'default';
+export type ButtonVariants = 'solid' | 'twoTone' | 'plain' | 'default';
 
-export type DropdownPlacement =
+export type NavTypes = 'item' | 'collapse' | 'title';
+
+export type DropdownPlacements =
   | 'top-start'
   | 'top-center'
   | 'top-end'
@@ -35,4 +37,4 @@ export type DropdownPlacement =
   | 'middle-end-top'
   | 'middle-end-bottom';
 
-export type DropdownVariant = 'default' | 'divider' | 'header' | 'custom';
+export type DropdownVariants = 'default' | 'divider' | 'header' | 'custom';

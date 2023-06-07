@@ -1,4 +1,5 @@
 import HeaderActionToggle from '@components/ui/header/actions/header-action-toggle.component';
+import HeaderActionUser from '@components/ui/header/actions/header-action-user.component';
 import Header from '@components/ui/header/header.component';
 import SideNav from '@components/ui/sidenav/sidenav.component';
 import useResponsive from '@hooks/useResponsive';
@@ -18,6 +19,11 @@ const MainLayout: React.FC = () => {
           <Header
             className="border-b border-gray-200 dark:border-gray-700"
             prefix={<>{larger.md && <HeaderActionToggle />}</>}
+            suffix={
+              <>
+                <HeaderActionUser />
+              </>
+            }
           />
           <div className="flex h-full flex-auto flex-col justify-between">
             <main className="h-full">

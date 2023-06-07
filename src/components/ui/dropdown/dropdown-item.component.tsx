@@ -5,11 +5,11 @@ import DropdownMenuContext, {
 } from '@components/ui/dropdown/context/dropdown-menu';
 import MenuContext from '@components/ui/menu/context';
 import MenuItem from '@components/ui/menu/menu-item.component';
-import { DropdownVariant, Triggers } from '@constant';
+import { DropdownVariants, Triggers } from '@constant';
 import { chainedFunction, useUncertainRef } from '@helpers/util.helper';
+import useUniqueId from '@hooks/useUniqueId';
 import classNames from 'classnames';
 import { isNil } from 'lodash';
-import { nanoid } from 'nanoid';
 import React, { CSSProperties, forwardRef, ReactElement, Ref, useCallback, useContext, useEffect, useRef } from 'react';
 import { HiChevronRight } from 'react-icons/hi';
 
@@ -22,11 +22,11 @@ interface Props {
   style?: CSSProperties;
   active?: boolean;
   disabled?: boolean;
-  variant?: DropdownVariant;
-  eventKey: string;
-  submenu: ReactElement;
+  variant?: DropdownVariants;
+  eventKey?: string;
+  submenu?: ReactElement | undefined;
   onClick?: (values?: any, event?: any) => void;
-  onSelect: (values?: any, event?: any) => void;
+  onSelect?: (values?: any, event?: any) => void;
 }
 
 const DropdownItem = forwardRef(
@@ -55,7 +55,7 @@ const DropdownItem = forwardRef(
     const submenuControl = useDropdownMenuContext(submenuRef);
 
     const menuitemRef = useUncertainRef(ref);
-    const menuitemId = `menu-item-${nanoid()}`;
+    const menuitemId = useUniqueId('menu-item-');
 
     const { open } = submenuControl;
 
@@ -126,7 +126,7 @@ const DropdownItem = forwardRef(
       return () => {
         unregisterItem?.(menuitemId);
       };
-    }, [registerItem, unregisterItem, ref, menuitemId, disabled, variant]);
+    }, [registerItem, unregisterItem, menuitemRef, menuitemId, disabled, variant]);
 
     if (variant === 'divider' || variant === 'custom' || variant === 'header') {
       const handlers = variant === 'custom' ? menuitemEventHandlers : {};
@@ -212,13 +212,16 @@ DropdownItem.defaultProps = {
   icon: undefined,
   trigger: 'click',
   asElement: 'li',
-  variant: 'divider',
+  variant: 'default',
   children: undefined,
   className: '',
   style: {},
   active: false,
   disabled: false,
+  eventKey: '',
+  submenu: undefined,
   onClick: () => 0,
+  onSelect: () => 0,
 };
 
 export default DropdownItem;

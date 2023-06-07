@@ -1,4 +1,4 @@
-import { ButtonShapes, ButtonVariant, ControlSizes, PrimaryColorLevel, Sizes, ThemeColor } from '@constant';
+import { ButtonShapes, ButtonVariants, ControlSizes, PrimaryColorLevel, Sizes, ThemeColor } from '@constant';
 import Spinner from '@components/ui/spinner/spinner.component';
 import useColorLevel from '@hooks/useColorLevel';
 import { useForm } from '@hooks/useForm';
@@ -15,7 +15,7 @@ interface Props extends React.ButtonHTMLAttributes<any> {
   className?: string;
   size?: Sizes;
   color?: string;
-  variant?: ButtonVariant;
+  variant?: ButtonVariants;
   icon?: React.ReactNode | string | undefined;
   children?: React.ReactNode | undefined;
 }

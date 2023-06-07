@@ -1,13 +1,12 @@
-import { DropdownPlacement } from '@constant';
+import { DropdownPlacements } from '@constant';
 import classNames from 'classnames';
 import React, { forwardRef, Ref } from 'react';
 import { HiChevronDown, HiChevronLeft, HiChevronRight, HiChevronUp } from 'react-icons/hi';
 
-// eslint-disable-next-line react/require-default-props
-const DropdownToggleDefaultContent: React.FC<{ placement?: DropdownPlacement; children?: React.ReactNode | undefined }> = ({
-  placement,
-  children,
-}) => {
+const DropdownToggleDefaultContent: React.FC<{
+  placement: DropdownPlacements;
+  children: React.ReactNode | undefined;
+}> = ({ placement, children }) => {
   // TODO: impl rtl handling
   if (placement && placement.includes('middle-start')) {
     return (
