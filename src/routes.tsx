@@ -58,7 +58,7 @@ export const navigations: NavMenu[] = [
     key: 'group',
     path: '',
     title: 'Group Menu',
-    icon: null,
+    icon: <HiOutlineHome />,
     type: 'collapse',
     children: [
       {
