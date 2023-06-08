@@ -59,7 +59,7 @@ export const navigations: NavMenu[] = [
     path: '',
     title: 'Group Menu',
     icon: null,
-    type: 'title',
+    type: 'collapse',
     children: [
       {
         key: 'group.one',

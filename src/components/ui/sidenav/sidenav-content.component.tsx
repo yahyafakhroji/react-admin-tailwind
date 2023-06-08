@@ -1,3 +1,5 @@
+import MenuGroup from '@components/ui/menu/menu-group.component';
+import SideNavMenuCollapse from '@components/ui/sidenav/menu/sidenav-menu-collapse.component';
 import SideNavMenuGroup from '@components/ui/sidenav/menu/sidenav-menu-group.component';
 import SideNavMenuSingle from '@components/ui/sidenav/menu/sidenav-menu-single.component';
 import { NavMenu } from '@components/ui/sidenav/sidenav.component';
@@ -19,9 +21,8 @@ const SideNavContent: React.FC<{ onMenuItemClick?: () => void }> = ({ onMenuItem
       return <SideNavMenuSingle key={nav.key} nav={nav} onClick={handleLinkClick} />;
     }
 
-    // @TODO For Collapse Menu
     if (nav.children.length && nav.type === 'collapse') {
-      return <h2>Collapse</h2>;
+      return <SideNavMenuCollapse key={nav.key} nav={nav} onClick={handleLinkClick} />;
     }
 
     return (
@@ -29,8 +30,17 @@ const SideNavContent: React.FC<{ onMenuItemClick?: () => void }> = ({ onMenuItem
         {nav.children.length &&
           nav.children.map((child) => {
             if (child.children.length) {
-              // @TODO For Collapse Menu
-              return <h2>Collapse</h2>;
+              return (
+                <MenuGroup label={nav.title}>
+                  {nav.children.map((sub) => {
+                    if (sub.children.length) {
+                      return <SideNavMenuCollapse key={nav.key} nav={nav} onClick={handleLinkClick} />;
+                    }
+
+                    return <SideNavMenuSingle key={nav.key} nav={nav} onClick={handleLinkClick} />;
+                  })}
+                </MenuGroup>
+              );
             }
 
             return <SideNavMenuSingle key={child.key} nav={child} onClick={handleLinkClick} />;

@@ -1,6 +1,6 @@
 import { DropdownMenuContextProvider, useDropdownMenuContext } from '@components/ui/dropdown/context/dropdown-menu';
 import DropdownItem from '@components/ui/dropdown/dropdown-item.component';
-import MenuContext, { MenuContextProvider } from '@components/ui/menu/context';
+import { MenuContext, MenuContextProvider } from '@components/ui/menu/context';
 import { DropdownPlacements, Triggers } from '@constant';
 import { useUncertainRef } from '@helpers/util.helper';
 import useUniqueId from '@hooks/useUniqueId';

@@ -3,7 +3,6 @@ import DropdownMenuContext, {
   DropdownMenuContextProvider,
   useDropdownMenuContext,
 } from '@components/ui/dropdown/context/dropdown-menu';
-import MenuContext from '@components/ui/menu/context';
 import MenuItem from '@components/ui/menu/menu-item.component';
 import { DropdownVariants, Triggers } from '@constant';
 import { chainedFunction, useUncertainRef } from '@helpers/util.helper';
@@ -12,6 +11,7 @@ import classNames from 'classnames';
 import { isNil } from 'lodash';
 import React, { CSSProperties, forwardRef, ReactElement, Ref, useCallback, useContext, useEffect, useRef } from 'react';
 import { HiChevronRight } from 'react-icons/hi';
+import { MenuContext } from '@components/ui/menu/context';
 
 interface Props {
   icon?: string | undefined;
