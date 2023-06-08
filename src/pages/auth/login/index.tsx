@@ -1,7 +1,7 @@
-import Button from '@components/ui/button/button.component';
-import FormContainer from '@components/ui/form/form-container.component';
-import FormItem from '@components/ui/form/form-item.component';
-import Input from '@components/ui/input/input.component';
+import Button from '@theme/components/button/button.component';
+import FormContainer from '@theme/components/form/form-container.component';
+import FormItem from '@theme/components/form/form-item.component';
+import Input from '@theme/components/input/input.component';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';

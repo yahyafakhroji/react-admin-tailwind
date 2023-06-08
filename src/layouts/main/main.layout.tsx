@@ -1,8 +1,8 @@
-import HeaderActionToggle from '@components/ui/header/actions/header-action-toggle.component';
-import HeaderActionUser from '@components/ui/header/actions/header-action-user.component';
-import Header from '@components/ui/header/header.component';
-import SideNav from '@components/ui/sidenav/sidenav.component';
-import useResponsive from '@hooks/useResponsive';
+import HeaderToggle from '@components/header/header-toggle.component';
+import HeaderUser from '@components/header/header-user.component';
+import Header from '@theme/components/header/header.component';
+import SideNav from '@theme/components/sidenav/sidenav.component';
+import useResponsive from '@theme/hooks/useResponsive';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -18,10 +18,10 @@ const MainLayout: React.FC = () => {
         <div className={style.container}>
           <Header
             className="border-b border-gray-200 dark:border-gray-700"
-            prefix={<>{larger.md && <HeaderActionToggle />}</>}
+            prefix={<>{larger.md && <HeaderToggle />}</>}
             suffix={
               <>
-                <HeaderActionUser />
+                <HeaderUser />
               </>
             }
           />

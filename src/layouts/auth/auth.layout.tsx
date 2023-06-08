@@ -1,4 +1,4 @@
-import Logo from '@components/ui/logo/logo.component';
+import Logo from '@theme/components/logo/logo.component';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 

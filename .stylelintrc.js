@@ -22,7 +22,13 @@ module.exports = {
     'selector-no-vendor-prefix': true,
     'shorthand-property-no-redundant-values': true,
     'value-no-vendor-prefix': true,
-    'at-rule-no-unknown': null,
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['tailwind', 'apply', 'variants', 'responsive', 'screen', 'layer'],
+      },
+    ],
+    'declaration-block-trailing-semicolon': null,
 
     'scss/color-no-invalid-hex': true,
     'scss/no-duplicate-variables': true,

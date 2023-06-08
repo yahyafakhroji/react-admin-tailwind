@@ -37,12 +37,12 @@ export default defineConfig(({ mode }) => {
           require('postcss-preset-env'),
         ],
       },
-      /*preprocessorOptions: {
+      preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: `@import "src/styles/vars.scss";`,
+          additionalData: `@import "src/theme/styles/index.scss";`,
         },
-      },*/
+      },
     },
   };
 });

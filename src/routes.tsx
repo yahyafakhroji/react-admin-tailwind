@@ -1,5 +1,5 @@
 /*  eslint-disable react/react-in-jsx-scope */
-import { NavMenu } from '@components/ui/sidenav/sidenav.component';
+import { NavMenu } from '@theme/components/sidenav/sidenav.component';
 import AuthLayout from '@layouts/auth/auth.layout';
 import MainLayout from '@layouts/main/main.layout';
 import LoginPage from '@pages/auth/login';
